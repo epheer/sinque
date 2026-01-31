@@ -41,7 +41,11 @@ const parseTime = (value: string): number => {
 
 type OnCueCallback = (cue: Cue) => Cue | void | null;
 
-const parseTTMLString = (xml: string, onCue?: OnCueCallback): Cue[] => {
+const parseTTMLString = (
+  xml: string,
+  onCue?: OnCueCallback,
+  trimCues?: boolean
+): Cue[] => {
   const doc = parseDoc(xml);
 
   const nodes = doc.getElementsByTagName('p');
@@ -58,10 +62,13 @@ const parseTTMLString = (xml: string, onCue?: OnCueCallback): Cue[] => {
       ? parseTime(endAttr)
       : begin + parseTime(durAttr ?? '0s');
 
+    const text: string = node.textContent;
+    const formatted: string = trimCues === true ? text.trim() : text;
+
     let cue: Cue = {
       start: begin,
       end,
-      text: node.textContent?.trim() ?? '',
+      text: formatted,
     };
 
     if (typeof onCue !== 'undefined') {
@@ -82,21 +89,27 @@ const parseTTMLString = (xml: string, onCue?: OnCueCallback): Cue[] => {
 
 const parseTTMLFile = async (
   file: Blob,
-  onCue?: OnCueCallback
+  onCue?: OnCueCallback,
+  trimCues?: boolean
 ): Promise<Cue[]> => {
   const text = await file.text();
-  return parseTTMLString(text, onCue);
+  return parseTTMLString(text, onCue, trimCues);
 };
 
 export type TTMLParserOptions = {
   ttml: string | File;
   onCue?: OnCueCallback;
+  trimCues?: boolean;
 };
 
-export const parse = async ({ ttml, onCue }: TTMLParserOptions) => {
+export const parse = async ({
+  ttml,
+  onCue,
+  trimCues = true,
+}: TTMLParserOptions) => {
   if (ttml instanceof File) {
-    return await parseTTMLFile(ttml, onCue);
+    return await parseTTMLFile(ttml, onCue, trimCues);
   }
 
-  return parseTTMLString(ttml, onCue);
+  return parseTTMLString(ttml, onCue, trimCues);
 };
