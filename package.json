@@ -19,7 +19,8 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/module.ts --format esm,cjs --dts --clean",
-    "dev": "tsup src/module.ts --format esm,cjs --dts --watch"
+    "dev": "tsup src/module.ts --format esm,cjs --dts --watch",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "ttml",
@@ -29,6 +30,14 @@
     "timed-text",
     "parser"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epheer/sinque.git"
+  },
+  "homepage": "https://github.com/epheer/sinque.git#readme",
+  "bugs": {
+    "url": "https://github.com/epheer/sinque.git#issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "prettier": "^3.8.1",
