@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Lightweight TTML parser and timed-text rendering engine for the web",
   "type": "module",
-
   "exports": {
     ".": {
       "types": "./dist/module.d.ts",
@@ -11,22 +10,17 @@
       "require": "./dist/module.cjs"
     }
   },
-
   "main": "./dist/module.cjs",
   "module": "./dist/module.js",
   "types": "./dist/module.d.ts",
-
   "files": [
     "dist"
   ],
-
   "sideEffects": false,
-
   "scripts": {
     "build": "tsup src/module.ts --format esm,cjs --dts --clean",
     "dev": "tsup src/module.ts --format esm,cjs --dts --watch"
   },
-
   "keywords": [
     "ttml",
     "karaoke",
@@ -35,10 +29,9 @@
     "timed-text",
     "parser"
   ],
-
   "license": "MIT",
-
   "devDependencies": {
+    "prettier": "^3.8.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
