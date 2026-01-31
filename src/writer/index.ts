@@ -39,7 +39,7 @@ const textToNodes = (
   ...(endSilence ? [createNode()] : []),
 ];
 
-export type TTMLRenderOptions = {
+export type TTMLWriterOptions = {
   text: string;
   silence?: {
     start?: boolean;
@@ -47,23 +47,23 @@ export type TTMLRenderOptions = {
   };
 };
 
-export type TTMLRenderApi = {
+export type TTMLWriterApi = {
   rows: string[];
-  write: (nodeIndex: number, endTime: number) => void;
+  record: (nodeIndex: number, endTime: number) => void;
   toString: () => string;
-  toBlob: () => Promise<Blob>;
+  toBlob: () => Blob;
 };
 
-export const render = ({
+export const write = ({
   text,
   silence = { start: true, end: true },
-}: TTMLRenderOptions): TTMLRenderApi => {
+}: TTMLWriterOptions): TTMLWriterApi => {
   const { start = true, end = true } = silence;
   const nodes = textToNodes(text, start, end);
 
   let lastEnd = 0;
 
-  const write = (nodeIndex: number, endTime: number) => {
+  const record = (nodeIndex: number, endTime: number) => {
     const node = nodes[nodeIndex];
     if (typeof node === 'undefined') {
       throw new Error('Invalid node index');
@@ -105,14 +105,14 @@ ${paragraphs}
 </tt>`;
   };
 
-  const toBlob = async (): Promise<Blob> => {
+  const toBlob = (): Blob => {
     const xml = toString();
     return new Blob([xml], { type: 'application/ttml+xml' });
   };
 
   return {
     rows: nodes.map((node: RowNode) => node.text),
-    write,
+    record,
     toString,
     toBlob,
   };
