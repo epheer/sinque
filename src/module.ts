@@ -1,12 +1,3 @@
-import { parse, type TTMLParserOptions } from './parser';
-import type { Cue } from './ttml';
-
-type Sinque = {
-  parse: (opts: TTMLParserOptions) => Promise<Cue[]>;
-};
-
-const sinque: Sinque = {
-  parse,
-};
-
-export default sinque;
+export type { Cue } from './ttml';
+export { parse, type TTMLParserOptions } from './parser';
+export { render, type TTMLRenderOptions, type TTMLRenderApi } from './renderer';
