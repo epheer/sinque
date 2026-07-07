@@ -94,8 +94,7 @@ export const write = ({
       )
       .join('\n');
 
-    return `
-<?xml version="1.0" encoding="UTF-8"?>
+    return `<?xml version="1.0" encoding="UTF-8"?>
 <tt xmlns="http://www.w3.org/ns/ttml">
   <body>
     <div>
