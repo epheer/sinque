@@ -9,11 +9,11 @@ A small toolkit for working with **TTML (Timed Text Markup Language)** in the br
 
 ## Features
 
-* ✅ TTML parsing (basic `<p>` cues)
-* ✅ Plain text → TTML **writer engine** (line timing recorder)
-* ✅ Optional leading/trailing *silence* rows
-* ✅ XML escaping for safe output
-* ✅ Export as **string** or **Blob**
+* TTML parsing (basic `<p>` cues)
+* Plain text → TTML **writer engine** (line timing recorder)
+* Optional leading/trailing *silence* rows
+* XML escaping for safe output
+* Export as **string** or **Blob**
 
 ---
 

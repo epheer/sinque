@@ -1,6 +1,6 @@
 {
   "name": "sinque",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight TTML parser and timed-text rendering engine for the web",
   "type": "module",
   "exports": {
